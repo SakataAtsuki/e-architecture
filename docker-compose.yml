@@ -1,0 +1,29 @@
+version: "3"
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./docker/go/Dockerfile
+    tty: true
+    volumes:
+      - type: bind
+        source: ./migrations
+        target: /go/src/app/migrations
+    environment:
+      - DB_HOST=db
+      - DB_NAME=${DB_NAME:-testdb}
+      - DB_USER=${DB_USER:-gopher}
+      - DB_PASSWORD=${DB_PASSWORD:-postgres}
+      - DB_PORT=${DB_PASSWORD:-5432}
+    depends_on:
+      - db
+  db:
+    build:
+      context: .
+      dockerfile: ./docker/postgres/Dockerfile
+    ports:
+      - target: 5432
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER:-gopher}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-postgres}
+      - POSTGRES_DB=${POSTGRES_DB:-testdb}
