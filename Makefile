@@ -30,3 +30,11 @@ docker-destroy:
 .PHONY: docker-run-sql
 docker-run-sql:
 	docker compose exec app bash db-sql.sh
+
+.PHONY: docker-run-user-create
+docker-run-user-create:
+	docker compose exec app go run hack/user_create/main.go
+
+.PHONY: docker-run-user-get
+docker-run-user-get:
+	docker compose exec app go run hack/user_get/main.go
