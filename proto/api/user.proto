@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package e_architecture.api;
+
+option go_package = "github.com/SakataAtsuki/e-architecture/pkg/proto/api";
+
+//
+// * ユーザー
+//
+message User {
+  string id         = 1;  // ID
+  string name       = 2;  // 名前
+  Gender gender     = 3;  // 性別
+  int64  updated_at = 4;  // 更新日時
+}
+
+//
+// * 性別
+//
+enum Gender {
+  GENDER_OTHER = 0;  // その他
+  MALE         = 1;  // 男性
+  FEMALE       = 2;  // 女性
+}
