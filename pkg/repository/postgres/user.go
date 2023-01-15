@@ -34,17 +34,12 @@ func (u *User) Create(ctx context.Context, v *entity.User) (*entity.User, error)
 		}
 	}()
 
-	result, err := tx.Exec("INSERT INTO users(id, name) VALUES ($1, $2)", v.ID, v.Name)
+	_, err = tx.Exec("INSERT INTO users(id, name) VALUES ($1, $2)", v.ID, v.Name)
 	if err != nil {
 		return nil, errcode.New(err)
 	}
 
-	insertId, err := result.LastInsertId()
-	if err != nil {
-		return nil, errcode.New(err)
-	}
-
-	rows, err := tx.Query("SELECT id, name FROM users WHERE id = $1", insertId)
+	rows, err := tx.Query("SELECT id, name FROM users WHERE id = $1", v.ID)
 	if err != nil {
 		return nil, errcode.New(err)
 	}
