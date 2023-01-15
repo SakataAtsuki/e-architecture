@@ -7,8 +7,8 @@ services:
     tty: true
     volumes:
       - type: bind
-        source: ./migrations
-        target: /go/src/app/migrations
+        source: ./sql
+        target: /go/src/app/sql
     environment:
       - DB_HOST=db
       - DB_NAME=${DB_NAME:-testdb}
