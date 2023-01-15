@@ -1,0 +1,11 @@
+version: v1
+plugins:
+  - remote: buf.build/protocolbuffers/plugins/go:v1.28.1-1
+    opt: module=github.com/SakataAtsuki/e-architecture
+    out: ./
+  - remote: buf.build/grpc/plugins/go:v1.2.0-1
+    opt: module=github.com/SakataAtsuki/e-architecture
+    out: ./
+  - remote: buf.build/grpc-ecosystem/plugins/grpc-gateway:v2.10.3-1
+    opt: module=github.com/SakataAtsuki/e-architecture
+    out: ./
