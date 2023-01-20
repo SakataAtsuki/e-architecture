@@ -18,10 +18,12 @@ func main() {
 		os.Getenv("DB_HOST"), os.Getenv("DB_NAME"), os.Getenv("DB_USER"), os.Getenv("DB_PASSWORD"), os.Getenv("DB_PORT"))
 	db, err := sql.Open("postgres", uri)
 	if err != nil {
-		errcode.New(err)
+		log.Println(errcode.New(err))
+		os.Exit(1)
 	}
 	if err := db.Ping(); err != nil {
-		errcode.New(err)
+		log.Println(errcode.New(err))
+		os.Exit(1)
 	}
 	log.Println("successfully connected to database")
 
@@ -35,7 +37,8 @@ func main() {
 
 	resp, err := uc.GetUser(ctx, req)
 	if err != nil {
-		errcode.New(err)
+		log.Println(errcode.New(err))
+		os.Exit(1)
 	}
 	log.Println(resp.User.ID, resp.User.Name)
 }
