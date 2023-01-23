@@ -10,7 +10,7 @@ import (
 	_ "github.com/lib/pq"
 )
 
-var _ (repository.User) = (*User)(nil)
+var _ repository.User = (*User)(nil)
 
 type User struct {
 	db *sql.DB
